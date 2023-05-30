@@ -6,23 +6,11 @@
 #define SRAM_END	((SRAM_START) + (SRAM_SIZE))
 #define STACK_START 	SRAM_END
 
-extern char data_start[];
-extern char data_load_start[];
-extern char data_size[];
-
-extern char bss_start[];
-extern char bss_size[];
-
-typedef void(*function_type)();
-
-extern function_type init_array_start[];
-extern function_type init_array_end[];
-
-void init(void);
 void Default_Handler(void);
 
 //STACK
-void Reset_Handler(void);
+//void Reset_Handler(void);
+void Reset_Handler(void)		__attribute__((weak, alias("Default_Handler")));
 void NMI_Handler(void)			__attribute__((weak, alias("Default_Handler")));
 void HardFault_Handler(void)		__attribute__((weak, alias("Default_Handler")));
 void MemManage_Handler(void)		__attribute__((weak, alias("Default_Handler")));
@@ -176,55 +164,3 @@ uint32_t __attribute__ ((section(".isr_vector"))) isr_vector[77] =
 void Default_Handler(void)
 {
 }
-
-void copy_data(void);
-void clear_bss(void);
-void call_static_ctors(void);
-
-void Reset_Handler(void)
-{
-	init();
-	main();
-	while(1);
-}
-
-void init(void)
-{
-	copy_data();
-	clear_bss();
-	call_static_ctors();
-}
-
-void copy_data(void)
-{
-	for(int i = 0; i < (size_t)data_size; i++)
-	{
-		data_start[i] = data_load_start[i];
-	}
-}
-
-void clear_bss(void)
-{
-	for(int i = 0; i < (size_t)bss_size; i++)
-	{
-		bss_start[i] = 0;
-	}
-}
-
-void call_static_ctors(void)
-{
-	for(function_type fn = init_array_start[0]; fn < init_array_end[0]; fn++)
-	{
-		fn();
-	}
-	
-	//(*fn)();
-/*	std::for_each(init_array_start,
-			init_array_end,
-			[](const function_type pf)
-			{
-				pf();
-			});
-*/			
-}
-

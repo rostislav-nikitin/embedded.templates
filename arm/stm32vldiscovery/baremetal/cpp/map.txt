@@ -1,0 +1,233 @@
+
+Discarded input sections
+
+ .group         0x00000000        0xc main.o
+ .group         0x00000000        0x8 main.o
+
+Memory Configuration
+
+Name             Origin             Length             Attributes
+ROM              0x08000000         0x00020000         xr
+RAM              0x20000000         0x00002000         xrw
+*default*        0x00000000         0xffffffff
+
+Linker script and memory map
+
+
+.isr_vector     0x08000000      0x134
+ init.o(.isr_vector)
+                0x08000000                        . = ALIGN (0x4)
+ .isr_vector    0x08000000      0x134 isr_vector.o
+                0x08000000                isr_vector
+
+.init_array     0x08000134        0x4
+                0x08000134                        init_array_start = .
+ *(.init_array)
+ .init_array    0x08000134        0x4 main.o
+                0x08000138                        . = ALIGN (0x4)
+                0x08000138                        init_array_end = .
+
+.text           0x08000138      0x440
+ *(.text)
+ .text          0x08000138       0xd4 init.o
+                0x08000138                Reset_Handler
+                0x08000146                init()
+                0x0800015a                copy_data()
+                0x080001a0                clear_bss()
+                0x080001d8                call_static_ctors()
+ .text          0x0800020c        0xc isr_vector.o
+                0x0800020c                RTC_WKUP_Handler
+                0x0800020c                FLASH_Handler
+                0x0800020c                DebugMon_Handler
+                0x0800020c                HardFault_Handler
+                0x0800020c                TIM1_BRK_TIM15_Handler
+                0x0800020c                SysTick_Handler
+                0x0800020c                USART3_Handler
+                0x0800020c                DMA1_Channel7_Handler
+                0x0800020c                PendSV_Handler
+                0x0800020c                DMA1_Channel6_Handler
+                0x0800020c                TIM6_DAC_Handler
+                0x0800020c                EXTI15_10_Handler
+                0x0800020c                DMA2_Channel1_Handler
+                0x0800020c                I2C1_EV_Handler
+                0x0800020c                WWDG_Handler
+                0x0800020c                EXTI4_Handler
+                0x0800020c                DMA1_Channel1_Handler
+                0x0800020c                I2C1_ER_Handler
+                0x0800020c                UsageFault_Handler
+                0x0800020c                ADC1_Handler
+                0x0800020c                TIM1_CC_Handler
+                0x0800020c                I2C2_ER_Handler
+                0x0800020c                FSMC_Handler
+                0x0800020c                EXTI1_Handler
+                0x0800020c                EXTI3_Handler
+                0x0800020c                EXTI2_Handler
+                0x0800020c                UART4_Handler
+                0x0800020c                TIM1_TRG_COM_TIM17_Handler
+                0x0800020c                EXTI9_5_Handler
+                0x0800020c                TIM2_Handler
+                0x0800020c                USART1_Handler
+                0x0800020c                DMA1_Channel4_Handler
+                0x0800020c                TIM3_Handler
+                0x0800020c                Default_Handler
+                0x0800020c                TIM13_Handler
+                0x0800020c                DMA1_Channel3_Handler
+                0x0800020c                TAMPER_STAMP_Handler
+                0x0800020c                RTC_Alarm_Handler
+                0x0800020c                TIM4_Handler
+                0x0800020c                SPI2_Handler
+                0x0800020c                DMA1_Channel2_Handler
+                0x0800020c                MemManage_Handler
+                0x0800020c                EXTI0_Handler
+                0x0800020c                SVC_Handler
+                0x0800020c                TIM14_Handler
+                0x0800020c                DMA1_Channel5_Handler
+                0x0800020c                USART2_Handler
+                0x0800020c                DMA2_Channel4_5_Handler
+                0x0800020c                SPI1_Handler
+                0x0800020c                I2C2_EV_Handler
+                0x0800020c                SPI3_Handler
+                0x0800020c                DMA2_Channel3_Handler
+                0x0800020c                RCC_Handler
+                0x0800020c                PVD_Handler
+                0x0800020c                UART5_Handler
+                0x0800020c                DMA2_Channel2_Handler
+                0x0800020c                TIM5_Handler
+                0x0800020c                TIM7_Handler
+                0x0800020c                CEC_Handler
+                0x0800020c                TIM1_UP_TIM16_Handler
+                0x0800020c                BusFault_Handler
+                0x0800020c                Channel5_Handler
+                0x0800020c                TIM12_Handler
+ .text          0x08000218      0x114 main.o
+                0x08000218                print(char const*)
+                0x0800024c                printBss()
+                0x08000270                printData()
+                0x08000294                NMI_Handler
+                0x080002a8                _sbrk
+                0x080002c4                main
+ .text          0x0800032c      0x206 arm32_aeabi_divmod.o
+                0x080003e8                __aeabi_uidiv
+                0x08000418                __aeabi_uidivmod
+                0x08000454                __aeabi_idiv
+                0x080004bc                __aeabi_idivmod
+ .text          0x08000532        0x0 arm32_aeabi_divmod_a32.o
+ *(.text.*)
+ *fill*         0x08000532        0x2 
+ .text._ZN9TestClassC2Ev
+                0x08000534       0x20 main.o
+                0x08000534                TestClass::TestClass()
+                0x08000534                TestClass::TestClass()
+ .text._Z3addIiET_S0_S0_
+                0x08000554       0x1a main.o
+                0x08000554                int add<int>(int, int)
+ *fill*         0x0800056e        0x2 
+ .text.ret_idivmod_values
+                0x08000570        0x4 arm32_aeabi_divmod_a32.o
+                0x08000570                ret_idivmod_values
+ .text.ret_uidivmod_values
+                0x08000574        0x4 arm32_aeabi_divmod_a32.o
+                0x08000574                ret_uidivmod_values
+                0x08000578                        . = ALIGN (0x4)
+
+.glue_7         0x08000578        0x0
+ .glue_7        0x08000578        0x0 linker stubs
+
+.glue_7t        0x08000578        0x0
+ .glue_7t       0x08000578        0x0 linker stubs
+
+.vfp11_veneer   0x08000578        0x0
+ .vfp11_veneer  0x08000578        0x0 linker stubs
+
+.v4_bx          0x08000578        0x0
+ .v4_bx         0x08000578        0x0 linker stubs
+
+.iplt           0x08000578        0x0
+ .iplt          0x08000578        0x0 init.o
+
+.ARM.exidx
+ *(.ARM.exidx* .gnu.linkonce.armexidx.*)
+
+.ARM.attribute
+ *(.ARM.attribute)
+
+.ARM.attributes
+                0x08000578       0x2b
+ *(.ARM.attributes)
+ .ARM.attributes
+                0x08000578       0x2d init.o
+ .ARM.attributes
+                0x080005a5       0x2d isr_vector.o
+ .ARM.attributes
+                0x080005d2       0x2d main.o
+ .ARM.attributes
+                0x080005ff       0x2d arm32_aeabi_divmod.o
+ .ARM.attributes
+                0x0800062c       0x1b arm32_aeabi_divmod_a32.o
+
+.note.GNU-stack
+                0x08000578        0x0
+ *(.note.GNU-stack)
+ .note.GNU-stack
+                0x08000578        0x0 arm32_aeabi_divmod_a32.o
+ *(.note.GNU-stack.*)
+
+.comment        0x00000000       0x55
+ .comment       0x00000000       0x55 init.o
+                                 0x56 (size before relaxing)
+ .comment       0x00000055       0x56 isr_vector.o
+ .comment       0x00000055       0x56 main.o
+ .comment       0x00000055       0x56 arm32_aeabi_divmod.o
+                0x000000ac                        . = ALIGN (0x4)
+
+.rodata         0x08000578       0x40
+ *(.rodata)
+ .rodata        0x08000578       0x3d main.o
+ *(.rodata.*)
+                0x080005b8                        . = ALIGN (0x4)
+ *fill*         0x080005b5        0x3 
+                0x080005b8                        rodata_end = .
+
+.rel.dyn        0x080005b8        0x0
+ .rel.iplt      0x080005b8        0x0 init.o
+
+.data           0x20000000        0x8 load address 0x080005b8
+                0x20000000                        data_start = .
+ *(.data)
+ .data          0x20000000        0x0 init.o
+ .data          0x20000000        0x0 isr_vector.o
+ .data          0x20000000        0x8 main.o
+                0x20000000                y
+                0x20000001                z
+                0x20000004                TestClass::static_var
+ .data          0x20000008        0x0 arm32_aeabi_divmod.o
+ .data          0x20000008        0x0 arm32_aeabi_divmod_a32.o
+ *(.data.*)
+                0x20000008                        . = ALIGN (0x4)
+                0x20000008                        data_end = .
+                0x00000008                        data_size = SIZEOF (.data)
+                0x080005b8                        data_load_start = LOADADDR (.data)
+
+.igot.plt       0x20000008        0x0 load address 0x080005c0
+ .igot.plt      0x20000008        0x0 init.o
+
+.bss            0x20000008        0x8
+                0x20000008                        bss_start = .
+ *(.bss)
+ .bss           0x20000008        0x0 init.o
+ .bss           0x20000008        0x0 isr_vector.o
+ .bss           0x20000008        0x8 main.o
+                0x20000008                x
+                0x2000000c                staticTestClass
+ .bss           0x20000010        0x0 arm32_aeabi_divmod.o
+ .bss           0x20000010        0x0 arm32_aeabi_divmod_a32.o
+                0x20000010                        . = ALIGN (0x4)
+                0x00000008                        bss_size = SIZEOF (.bss)
+                0x20000010                        . = ALIGN (0x4)
+LOAD isr_vector.o
+LOAD init.o
+LOAD main.o
+LOAD arm32_aeabi_divmod.o
+LOAD arm32_aeabi_divmod_a32.o
+OUTPUT(firmware.elf elf32-littlearm)
+LOAD linker stubs

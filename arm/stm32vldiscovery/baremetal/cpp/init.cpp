@@ -1,8 +1,4 @@
-#include <cstring>
-#include <algorithm>
-#include <cstdint>
-
-#define STACK (0x00000000U)
+#include <cstddef>
 
 extern char data_start[];
 extern char data_load_start[];
@@ -16,26 +12,20 @@ typedef void(*function_type)();
 extern function_type init_array_start[];
 extern function_type init_array_end[];
 
-void Default_Handler(void);
-
-void ResetHandler(void) __attribute__((weak, alias("Default_Handler")));
-
-uint32_t __attribute__ ((section(".isr_vector"))) isr_vector[32] =
-{
-	STACK,
-	(uint32_t)&ResetHandler
-};
-
-void Default_Handler(void)
-{
-}
-
+int main(void);
+void init(void);
 void copy_data(void);
 void clear_bss(void);
 void call_static_ctors(void);
 
+extern "C" void Reset_Handler(void)
+{
+	init();
+	main();
+	while(1);
+}
 
-extern "C" void init(void)
+void init(void)
 {
 	copy_data();
 	clear_bss();

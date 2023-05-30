@@ -9,13 +9,14 @@ CPPFLAGS=-O0 -fno-stack-protector -mcpu=cortex-m3 -mfloat-abi=softfp -mthumb -fn
 CPPINCLUDE=-I./include -I/home/ros/.local/arm-gnu-toolchain-12.2/arm-none-eabi/include
 CINCLUDE=-I./include -I/home/ros/.local/arm-gnu-toolchain-12.2/arm-none-eabi/include
 LDLIBPATH=-L/home/ros/.local/arm-gnu-toolchain-12.2/arm-none-eabi/lib -L./lib
-LDLIB=-lc_nano -lm
-LDFLAGS= -T qemuboot.ld  -z noexecstack -nostdlib
+LDLIB=
+#LDLIB=-lc_nano -lm
+LDFLAGS= -T qemuboot.ld  -z noexecstack -nostdlib -Map=map.txt
 
 all: firmware.elf
 	arm-none-eabi-objcopy -O binary firmware.elf firmware.bin
 
-firmware.elf:  init.o main.o arm32_aeabi_divmod.o arm32_aeabi_divmod_a32.o
+firmware.elf:  isr_vector.o init.o main.o arm32_aeabi_divmod.o arm32_aeabi_divmod_a32.o
 	$(LD) $(LDFLAGS) $(LDLIBPATH) $^ $(LDLIB) -o $@
 
 arm32_aeabi_divmod.o:arm32_aeabi_divmod.c
@@ -30,8 +31,11 @@ arm32_aeabi_divmod_a32.o: arm32_aeabi_divmod_a32.S
 #startup.o: startup.s
 #	$(ASCC) $(ASFLAGS) $^ -o $@
 
-init.o: init.c
+isr_vector.o: isr_vector.c
 	$(CCC) $(CFLAGS) $^ -o $@
+
+init.o: init.cpp
+	$(CPPCC) $(CPPFLAGS) $^ -o $@
 
 clean:
 	(rm -f *.o)

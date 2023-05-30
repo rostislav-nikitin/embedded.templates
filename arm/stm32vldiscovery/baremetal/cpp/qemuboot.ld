@@ -1,13 +1,13 @@
 INCLUDE qemuboot.memory
 
-ENTRY(main)
+ENTRY(Reset_Handler)
 SECTIONS
 {
 	.isr_vector :
 	{
 		init.o(.isr_vector)
+		. = ALIGN(4);
 	} > REGION_TEXT
-	. = ALIGN(4);
 /*	.startup :
 	{
 		startup.o(.text)
@@ -16,18 +16,19 @@ SECTIONS
 	{
 		init_array_start = .;
 		*(.init_array)
+		. = ALIGN(4);
 		init_array_end = .;
 	} > REGION_TEXT
-	. = ALIGN(4);
 	.text : 
 	{
 		*(.text)
 		*(.text.*)
+		. = ALIGN(4);
 	} > REGION_TEXT
 	.ARM.exidx : {
-/*	    __exidx_start = .; */
-	    *(.ARM.exidx* .gnu.linkonce.armexidx.*)
-/*	    __exidx_end = .; */
+/*	    	__exidx_start = .; */
+	    	*(.ARM.exidx* .gnu.linkonce.armexidx.*)
+/*	    	__exidx_end = .; */
 	} > REGION_DEBUG
 	.ARM.attribute :
 	{
@@ -42,10 +43,12 @@ SECTIONS
 		*(.note.GNU-stack)
 		*(.note.GNU-stack.*)
 	} > REGION_DEBUG
+	. = ALIGN(4);
 	.rodata : 
 	{
 		*(.rodata)
 		*(.rodata.*)
+		. = ALIGN(4);
 		rodata_end = .;
 	} > REGION_RODATA
 	.data : AT(rodata_end)
@@ -53,6 +56,7 @@ SECTIONS
 		data_start = .;
 		*(.data)
 		*(.data.*)
+		. = ALIGN(4);
 		data_end = .;
 	} > REGION_DATA
 	data_size = SIZEOF(.data);
@@ -62,11 +66,12 @@ SECTIONS
 	{
 		bss_start = .;
 		*(.bss)
+		. = ALIGN(4);
 	} > REGION_BSS
 	bss_size = SIZEOF(.bss);
 
-	. = ALIGN(8);
-	. = . + 0x1000;
-	stack_top = .;
+	. = ALIGN(4);
+	/*. = . + 0x1000;
+	stack_top = .;*/
 
 }
