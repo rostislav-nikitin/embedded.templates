@@ -1,5 +1,5 @@
-#include <cstddef>
-#include <cstdint>
+#include <string.h>
+#include <algorithm>
 
 extern char data_start[];
 extern char data_load_start[];
@@ -13,20 +13,12 @@ typedef void(*function_type)();
 extern function_type init_array_start[];
 extern function_type init_array_end[];
 
-int main(void);
-void init(void);
 void copy_data(void);
 void clear_bss(void);
 void call_static_ctors(void);
 
-extern "C" void Reset_Handler(void)
-{
-	init();
-	main();
-	while(1);
-}
 
-void init(void)
+extern "C" void init(void)
 {
 	copy_data();
 	clear_bss();
@@ -51,16 +43,10 @@ void clear_bss(void)
 
 void call_static_ctors(void)
 {
-	uint32_t init_array_size = init_array_end - init_array_start;
-	for(int i = 0; i < init_array_size; i++)
+	for(function_type fn = init_array_start[0]; fn < init_array_end[0]; fn++)
 	{
-		function_type fn = init_array_start[i];
 		fn();
 	}
-	/*for(function_type fn = init_array_start[0]; fn < init_array_end[0]; fn++)
-	{
-		fn();
-	}*/
 	
 	//(*fn)();
 /*	std::for_each(init_array_start,

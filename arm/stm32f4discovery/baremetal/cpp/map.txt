@@ -1,0 +1,232 @@
+
+Discarded input sections
+
+ .group         0x00000000        0xc main.o
+ .group         0x00000000        0x8 main.o
+
+Memory Configuration
+
+Name             Origin             Length             Attributes
+ROM              0x08000000         0x00100000         xr
+RAM              0x20000000         0x00020000         xrw
+*default*        0x00000000         0xffffffff
+
+Linker script and memory map
+
+
+.isr_vector     0x08000000      0x184
+ stm32f4xx_isr.o(.isr_vector)
+ .isr_vector    0x08000000      0x184 stm32f4xx_isr.o
+                0x08000000                isr_vector
+
+.init_array     0x08000184        0x4
+                0x08000184                        init_array_start = .
+ *(.init_array)
+ .init_array    0x08000184        0x4 main.o
+                0x08000188                        init_array_end = .
+                0x08000188                        . = ALIGN (0x4)
+
+.text           0x08000188      0x23c
+ *(.text)
+ .text          0x08000188        0xe stm32f4xx_isr.o
+                0x08000188                RTC_WKUP_Handler
+                0x08000188                FLASH_Handler
+                0x08000188                SVCall_Handler
+                0x08000188                DMA2_Stream7_Handler
+                0x08000188                OTG_HS_Handler
+                0x08000188                DMA2_Stream3_Handler
+                0x08000188                SysTick_Handler
+                0x08000188                USART3_Handler
+                0x08000188                PendSV_Handler
+                0x08000188                TIM6_DAC_Handler
+                0x08000188                CAN1_RX1_Handler
+                0x08000188                EXTI15_10_Handler
+                0x08000188                ADC_Handler
+                0x08000188                HASH_RNG_Handler
+                0x08000188                I2C1_EV_Handler
+                0x08000188                TAMP_STAMP_Handler
+                0x08000188                I2C3_ER_Handler
+                0x08000188                WWDG_Handler
+                0x08000188                EXTI4_Handler
+                0x08000188                I2C3_EV_Handler
+                0x08000188                DMA1_Stream1_Handler
+                0x08000188                DMA2_Stream4_Handler
+                0x08000188                DMA1_Stream7_Handler
+                0x08000188                OTG_FS_Handler
+                0x08000188                ETH_WKUP_Handler
+                0x08000188                TIM1_BRK_TIM9_Handler
+                0x08000188                I2C1_ER_Handler
+                0x08000188                DMA1_Stream3_Handler
+                0x08000188                UsageFault_Handler
+                0x08000188                TIM1_UP_TIM10_Handler
+                0x08000188                CAN1_RX0_Handler
+                0x08000188                TIM1_CC_Handler
+                0x08000188                I2C2_ER_Handler
+                0x08000188                USART6_Handler
+                0x08000188                TIM8_CC_Handler
+                0x08000188                CAN1_SCE_Handler
+                0x08000188                DMA1_Stream0_Handler
+                0x08000188                OTG_HS_EP1_OUT_Handler
+                0x08000188                FSMC_Handler
+                0x08000188                EXTI1_Handler
+                0x08000188                EXTI3_Handler
+                0x08000188                CRYP_Handler
+                0x08000188                EXTI2_Handler
+                0x08000188                UART4_Handler
+                0x08000188                CAN2_RX1_Handler
+                0x08000188                EXTI9_5_Handler
+                0x08000188                TIM2_Handler
+                0x08000188                USART1_Handler
+                0x08000188                CAN2_SCE_Handler
+                0x08000188                TIM3_Handler
+                0x08000188                DMA2_Stream6_Handler
+                0x08000188                Default_Handler
+                0x08000188                DCMI_Handler
+                0x08000188                TIM1_TRG_COM_TIM11_Handler
+                0x08000188                RTC_Alarm_Handler
+                0x08000188                TIM4_Handler
+                0x08000188                TIM8_UP_TIM13_Handler
+                0x08000188                CAN2_TX_Handler
+                0x08000188                SPI2_Handler
+                0x08000188                DMA2_Stream1_Handler
+                0x08000188                DMA1_Stream2_Handler
+                0x08000188                Debug_Handler
+                0x08000188                MemManage_Handler
+                0x08000188                EXTI0_Handler
+                0x08000188                TIM8_BRK_TIM12_Handler
+                0x08000188                CAN2_RX0_Handler
+                0x08000188                DMA2_Stream5_Handler
+                0x08000188                DMA1_Stream6_Handler
+                0x08000188                SDIO_Handler
+                0x08000188                USART2_Handler
+                0x08000188                ETH_Handler
+                0x08000188                SPI1_Handler
+                0x08000188                I2C2_EV_Handler
+                0x08000188                DMA2_Stream2_Handler
+                0x08000188                SPI3_Handler
+                0x08000188                DMA2_Stream0_Handler
+                0x08000188                RCC_Handler
+                0x08000188                PVD_Handler
+                0x08000188                UART5_Handler
+                0x08000188                DMA1_Stream5_Handler
+                0x08000188                TIM5_Handler
+                0x08000188                TIM7_Handler
+                0x08000188                TIM8_TRG_COM_TIM14_Handler
+                0x08000188                CAN1_TX_Handler
+                0x08000188                FPU_Handler
+                0x08000188                BusFault_Handler
+                0x08000188                DMA1_Stream4_Handler
+                0x08000188                OTG_HS_WKUP_Handler
+                0x08000188                OTG_FS_WKUP_Handler
+                0x08000188                OTG_HS_EP1_IN_Handler
+ *fill*         0x08000196        0x2 
+ .text          0x08000198       0xd8 init.o
+                0x08000198                Reset_Handler
+                0x080001a6                init()
+                0x080001ba                copy_data()
+                0x08000200                clear_bss()
+                0x0800023c                call_static_ctors()
+ .text          0x08000270      0x118 main.o
+                0x08000270                print(char const*)
+                0x080002a8                printBss()
+                0x080002cc                printData()
+                0x080002f0                NMI_Handler
+                0x08000304                _sbrk
+                0x08000320                main
+ *(.text.*)
+ .text._ZN9TestClassC2Ev
+                0x08000388       0x20 main.o
+                0x08000388                TestClass::TestClass()
+                0x08000388                TestClass::TestClass()
+ .text._Z3addIiET_S0_S0_
+                0x080003a8       0x1c main.o
+                0x080003a8                int add<int>(int, int)
+                0x080003c4                        . = ALIGN (0x4)
+
+.glue_7         0x080003c4        0x0
+ .glue_7        0x080003c4        0x0 linker stubs
+
+.glue_7t        0x080003c4        0x0
+ .glue_7t       0x080003c4        0x0 linker stubs
+
+.vfp11_veneer   0x080003c4        0x0
+ .vfp11_veneer  0x080003c4        0x0 linker stubs
+
+.v4_bx          0x080003c4        0x0
+ .v4_bx         0x080003c4        0x0 linker stubs
+
+.iplt           0x080003c4        0x0
+ .iplt          0x080003c4        0x0 stm32f4xx_isr.o
+
+.ARM.exidx
+ *(.ARM.exidx* .gnu.linkonce.armexidx.*)
+
+.ARM.attribute
+ *(.ARM.attribute)
+
+.ARM.attributes
+                0x080003c4       0x34
+ *(.ARM.attributes)
+ .ARM.attributes
+                0x080003c4       0x34 stm32f4xx_isr.o
+ .ARM.attributes
+                0x080003f8       0x34 init.o
+ .ARM.attributes
+                0x0800042c       0x34 main.o
+
+.note.GNU-stack
+ *(.note.GNU-stack)
+ *(.note.GNU-stack.*)
+                0x08000460                        . = ALIGN (0x4)
+
+.rodata         0x080003c4       0x40
+ *(.rodata)
+ .rodata        0x080003c4       0x3d main.o
+ *(.rodata.*)
+                0x08000404                        . = ALIGN (0x4)
+ *fill*         0x08000401        0x3 
+                0x08000404                        rodata_end = .
+
+.rel.dyn        0x08000404        0x0
+ .rel.iplt      0x08000404        0x0 stm32f4xx_isr.o
+
+.data           0x20000000        0x8 load address 0x08000404
+                0x20000000                        data_start = .
+ *(.data)
+ .data          0x20000000        0x0 stm32f4xx_isr.o
+ .data          0x20000000        0x0 init.o
+ .data          0x20000000        0x8 main.o
+                0x20000000                y
+                0x20000001                z
+                0x20000004                TestClass::static_var
+ *(.data.*)
+                0x20000008                        . = ALIGN (0x4)
+                0x20000008                        data_end = .
+                0x00000008                        data_size = SIZEOF (.data)
+                0x08000404                        data_load_start = LOADADDR (.data)
+
+.igot.plt       0x20000008        0x0 load address 0x0800040c
+ .igot.plt      0x20000008        0x0 stm32f4xx_isr.o
+
+.bss            0x20000008        0x8
+                0x20000008                        bss_start = .
+ *(.bss)
+ .bss           0x20000008        0x0 stm32f4xx_isr.o
+ .bss           0x20000008        0x0 init.o
+ .bss           0x20000008        0x8 main.o
+                0x20000008                x
+                0x2000000c                staticTestClass
+                0x20000010                        . = ALIGN (0x4)
+                0x00000008                        bss_size = SIZEOF (.bss)
+                0x20000010                        . = ALIGN (0x4)
+LOAD stm32f4xx_isr.o
+LOAD init.o
+LOAD main.o
+OUTPUT(firmware.elf elf32-littlearm)
+LOAD linker stubs
+
+.comment        0x00000000       0x55
+ .comment       0x00000000       0x55 stm32f4xx_isr.o
+                                 0x56 (size before relaxing)
+ .comment       0x00000055       0x56 init.o
+ .comment       0x00000055       0x56 main.o

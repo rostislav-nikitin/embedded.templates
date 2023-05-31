@@ -3,7 +3,7 @@
 #include <cstdio>
 #include <cstdint>
 
-unsigned char * const UART0_TX = (unsigned char *)0x40013804;
+unsigned char * const UART0_TX = (unsigned char *)0x101f1000;
 
 
 template<typename T>
@@ -15,7 +15,6 @@ T add(T x, T y)
 
 char x;
 char y = 49;
-char z = 55;
 
 
 void print(const char *str)
@@ -40,12 +39,6 @@ void printData()
 	*UART0_TX = y;
 	*UART0_TX = '\n';
 }
-
-extern "C" void NMI_Handler(void)
-{
-	print("Some handler\n");
-}
-
 
 class TestClass
 {
@@ -84,29 +77,29 @@ extern "C" void * _sbrk(int incr) {
 	return 1;
 }*/
 
-int main(void)
+int main()
 {
 	char buffer[32];
 
 	x = add(40, 8);
 
-	//x = 200 % 3 + 49;
+	x = 200 % 3 + 49;
 
 	print("Hello world!\n");
 
-	//printBss();
-	//printData();
+	printBss();
+	printData();
 
 	TestClass testClassInst;
-	//testClassInst.TestMethod();
+	testClassInst.TestMethod();
 	
-	//staticTestClass.TestMethod();
+	staticTestClass.TestMethod();
 
-	//print("Before sprintf");
-	//sprintf(buffer, "INT=%i\n", 3);
+	print("Before sprintf");
+	sprintf(buffer, "INT=%i\n", 3);
 //	sprintf(buffer, "s=", "Test");
-	//print(buffer);
-	//print("Aftersprintf");
+	print(buffer);
+	print("Aftersprintf");
 
 
 

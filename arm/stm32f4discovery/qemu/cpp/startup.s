@@ -1,5 +1,5 @@
-.thumb
-.syntax unified
+#.thumb
+#.syntax unified
 
 .global _startup
 

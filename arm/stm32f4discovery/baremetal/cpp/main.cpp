@@ -3,7 +3,7 @@
 #include <cstdio>
 #include <cstdint>
 
-unsigned char * const UART0_TX = (unsigned char *)0x40013804;
+unsigned char * const UART0_TX = (unsigned char *)0x101f1000;
 
 
 template<typename T>
@@ -92,7 +92,7 @@ int main(void)
 
 	//x = 200 % 3 + 49;
 
-	print("Hello world!\n");
+	//print("Hello world!\n");
 
 	//printBss();
 	//printData();
@@ -103,9 +103,9 @@ int main(void)
 	//staticTestClass.TestMethod();
 
 	//print("Before sprintf");
-	//sprintf(buffer, "INT=%i\n", 3);
+//	sprintf(buffer, "INT=%i\n", 3);
 //	sprintf(buffer, "s=", "Test");
-	//print(buffer);
+//	print(buffer);
 	//print("Aftersprintf");
 
 

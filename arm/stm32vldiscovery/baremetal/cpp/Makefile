@@ -53,3 +53,5 @@ run-debug:
 debug:
 	arm-none-eabi-gdb --eval-command="target remote localhost:1234"
 
+flash:
+	openocd -f board/stm32vldiscovery.cfg

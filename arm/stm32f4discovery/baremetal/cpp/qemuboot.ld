@@ -5,7 +5,7 @@ SECTIONS
 {
 	.isr_vector :
 	{
-		isr_vector.o(.isr_vector)
+		stm32f4xx_isr.o(.isr_vector)
 	} > REGION_TEXT
 	.init_array :
 	{
