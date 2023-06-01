@@ -4,11 +4,11 @@ LD=arm-none-eabi-gcc
 #LD=arm-none-eabi-ld
 ASCC=arm-none-eabi-as
 
-ASFLAGS=-mthumb -mcpu=cortex-m3
+ASFLAGS=-mthumb -mcpu=cortex-m3 -mfloat-abi=soft
 #CFLAGS=-O0 -fno-stack-protector -mcpu=cortex-m3 -mfloat-abi=softfp -mthumb -fno-exceptions -specs=nano.specs -specs=nosys.specs -std=gnu11 -c 
-CFLAGS=-O0 -fno-stack-protector -mcpu=cortex-m3 -mthumb -fno-exceptions -std=gnu11 -Wall -c 
+CFLAGS=-O0 -fno-stack-protector -mcpu=cortex-m3 -mthumb -mfloat-abi=soft -fno-exceptions -std=gnu11 -Wall -c 
 #CPPFLAGS=-O0 -fno-stack-protector -mcpu=cortex-m3 -mfloat-abi=softfp -mthumb -fno-exceptions -specs=nano.specs -specs=nosys.specs -std=c++11 -c 
-CPPFLAGS=-O0 -fno-stack-protector -mcpu=cortex-m3 -mthumb -fno-exceptions -std=c++11 -c 
+CPPFLAGS=-O0 -fno-stack-protector -mcpu=cortex-m3 -mthumb -mfloat-abi=soft -fno-exceptions -std=c++11 -c 
 CPPINCLUDE=
 #CPPINCLUDE=-I./include -I/home/ros/.local/arm-gnu-toolchain-12.2/arm-none-eabi/include
 CINCLUDE=
@@ -17,7 +17,7 @@ LDLIBPATH=
 #LDLIBPATH=-L/home/ros/.local/arm-gnu-toolchain-12.2/arm-none-eabi/lib -L./lib
 LDLIB=
 #LDLIB=-lc_nano -lm
-LDFLAGS= -T qemuboot.ld -Wl,-Map=map.txt --specs=nano.specs -mthumb -mcpu=cortex-m3
+LDFLAGS= -T qemuboot.ld -Wl,-Map=map.txt --specs=nano.specs -mthumb -mcpu=cortex-m3 -mfloat-abi=soft
 #LDFLAGS= -T qemuboot.ld  -z noexecstack -nostdlib -Map=map.txt
 
 all: firmware.elf
