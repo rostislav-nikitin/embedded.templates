@@ -19,14 +19,16 @@ void copy_data(void);
 void clear_bss(void);
 void call_static_ctors(void);
 
+/*
 extern "C" void Reset_Handler(void)
 {
 	init();
 	main();
 	while(1);
 }
+*/
 
-void init(void)
+extern "C" void __init_cpp(void)
 {
 	copy_data();
 	clear_bss();

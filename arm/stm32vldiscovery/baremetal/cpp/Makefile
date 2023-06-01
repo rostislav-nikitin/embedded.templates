@@ -1,40 +1,54 @@
 CPPCC=arm-none-eabi-g++
 CCC=arm-none-eabi-gcc
-LD=arm-none-eabi-ld
+LD=arm-none-eabi-gcc
+#LD=arm-none-eabi-ld
 ASCC=arm-none-eabi-as
 
-ASFLAGS=-mthumb -mcpu=cortex-m3 -mfloat-abi=softfp -c
-CFLAGS=-O0 -fno-stack-protector -mcpu=cortex-m3 -mfloat-abi=softfp -mthumb -fno-exceptions -specs=nano.specs -specs=nosys.specs -std=gnu11 -c 
-CPPFLAGS=-O0 -fno-stack-protector -mcpu=cortex-m3 -mfloat-abi=softfp -mthumb -fno-exceptions -specs=nano.specs -specs=nosys.specs -std=c++11 -c 
-CPPINCLUDE=-I./include -I/home/ros/.local/arm-gnu-toolchain-12.2/arm-none-eabi/include
-CINCLUDE=-I./include -I/home/ros/.local/arm-gnu-toolchain-12.2/arm-none-eabi/include
-LDLIBPATH=-L/home/ros/.local/arm-gnu-toolchain-12.2/arm-none-eabi/lib -L./lib
+ASFLAGS=-mthumb -mcpu=cortex-m3
+#CFLAGS=-O0 -fno-stack-protector -mcpu=cortex-m3 -mfloat-abi=softfp -mthumb -fno-exceptions -specs=nano.specs -specs=nosys.specs -std=gnu11 -c 
+CFLAGS=-O0 -fno-stack-protector -mcpu=cortex-m3 -mthumb -fno-exceptions -std=gnu11 -Wall -c 
+#CPPFLAGS=-O0 -fno-stack-protector -mcpu=cortex-m3 -mfloat-abi=softfp -mthumb -fno-exceptions -specs=nano.specs -specs=nosys.specs -std=c++11 -c 
+CPPFLAGS=-O0 -fno-stack-protector -mcpu=cortex-m3 -mthumb -fno-exceptions -std=c++11 -c 
+CPPINCLUDE=
+#CPPINCLUDE=-I./include -I/home/ros/.local/arm-gnu-toolchain-12.2/arm-none-eabi/include
+CINCLUDE=
+#CINCLUDE=-I./include -I/home/ros/.local/arm-gnu-toolchain-12.2/arm-none-eabi/include
+LDLIBPATH=
+#LDLIBPATH=-L/home/ros/.local/arm-gnu-toolchain-12.2/arm-none-eabi/lib -L./lib
 LDLIB=
 #LDLIB=-lc_nano -lm
-LDFLAGS= -T qemuboot.ld  -z noexecstack -nostdlib -Map=map.txt
+LDFLAGS= -T qemuboot.ld -Wl,-Map=map.txt --specs=nano.specs -mthumb -mcpu=cortex-m3
+#LDFLAGS= -T qemuboot.ld  -z noexecstack -nostdlib -Map=map.txt
 
 all: firmware.elf
 	arm-none-eabi-objcopy -O binary firmware.elf firmware.bin
 
-firmware.elf:  isr_vector.o init.o main.o arm32_aeabi_divmod.o arm32_aeabi_divmod_a32.o
+#firmware.elf:  stm32f1xx_isr.o init.o main.o syscalls.o arm32_aeabi_divmod.o arm32_aeabi_divmod_a32.o
+firmware.elf:  stm32f1xx_isr.o init_c.o init_cpp.o main.o syscalls.o
 	$(LD) $(LDFLAGS) $(LDLIBPATH) $^ $(LDLIB) -o $@
 
-arm32_aeabi_divmod.o:arm32_aeabi_divmod.c
-	$(CCC) $(CFLAGS) $(CINCLUDE) $^ -o $@
-	
 main.o: main.cpp
 	$(CPPCC) $(CPPFLAGS) $(CPPINCLUDE) $^ -o $@
 
-arm32_aeabi_divmod_a32.o: arm32_aeabi_divmod_a32.S
-	$(CCC) $(CFLAGS) $(CINCLUDE) $^ -o $@
+syscalls.o: syscalls.c
+	$(CCC) $(CFLAGS) $^ -o $@
 
+#arm32_aeabi_divmod.o:arm32_aeabi_divmod.c
+#	$(CCC) $(CFLAGS) $(CINCLUDE) $^ -o $@
+#	
+#arm32_aeabi_divmod_a32.o: arm32_aeabi_divmod_a32.S
+#	$(CCC) $(CFLAGS) $(CINCLUDE) $^ -o $@
+#
 #startup.o: startup.s
 #	$(ASCC) $(ASFLAGS) $^ -o $@
 
-isr_vector.o: isr_vector.c
+stm32f1xx_isr.o: stm32f1xx_isr.c
 	$(CCC) $(CFLAGS) $^ -o $@
 
-init.o: init.cpp
+init_c.o: init_c.c
+	$(CCC) $(CFLAGS) $^ -o $@
+
+init_cpp.o: init_cpp.cpp
 	$(CPPCC) $(CPPFLAGS) $^ -o $@
 
 clean:
@@ -47,7 +61,8 @@ run:
 	#qemu-system-arm -M versatilepb -nographic -kernel firmware.bin
 
 run-debug:
-	qemu-system-arm -s -S -M stm32vldiscovery -nographic -kernel firmware.bin
+	qemu-system-arm -s -S -M stm32vldiscovery -kernel firmware.bin
+	#qemu-system-arm -s -S -M stm32vldiscovery -nographic -kernel firmware.bin
 	#qemu-system-arm -s -S -M versatilepb -nographic -kernel firmware.bin
 
 debug:

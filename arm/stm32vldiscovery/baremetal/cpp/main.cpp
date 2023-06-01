@@ -41,11 +41,6 @@ void printData()
 	*UART0_TX = '\n';
 }
 
-extern "C" void NMI_Handler(void)
-{
-	print("Some handler\n");
-}
-
 
 class TestClass
 {
@@ -73,10 +68,10 @@ char *TestClass::static_var = "static_var\n";
 
 TestClass staticTestClass;
 
-extern "C" void * _sbrk(int incr) {
+/*extern "C" void * _sbrk(int incr) {
    // [snip...]
 	print(__PRETTY_FUNCTION__);
-}
+}*/
 
 /*tern "C" unsigned __aeabi_uidivmod(unsigned numerator, unsigned denominator)
 {
@@ -92,7 +87,9 @@ int main(void)
 
 	//x = 200 % 3 + 49;
 
-	print("Hello world!\n");
+	print("[print]Hello world!\n");
+	printf("[printf]Hello world!\n");
+	print("[print]Post Hello world!\n");
 
 	//printBss();
 	//printData();
@@ -102,11 +99,11 @@ int main(void)
 	
 	//staticTestClass.TestMethod();
 
-	//print("Before sprintf");
-	//sprintf(buffer, "INT=%i\n", 3);
-//	sprintf(buffer, "s=", "Test");
-	//print(buffer);
-	//print("Aftersprintf");
+	print("Before sprintf");
+	sprintf(buffer, "INT=%d\n", 3U);
+	//sprintf(buffer, "s=", "Test");
+	print(buffer);
+	print("Aftersprintf");
 
 
 

@@ -10,6 +10,8 @@ void Default_Handler(void);
 
 //STACK
 //void Reset_Handler(void);
+//void Reset_Handler(void);
+
 void Reset_Handler(void)		__attribute__((weak, alias("Default_Handler")));
 void NMI_Handler(void)			__attribute__((weak, alias("Default_Handler")));
 void HardFault_Handler(void)		__attribute__((weak, alias("Default_Handler")));
@@ -160,6 +162,7 @@ uint32_t __attribute__ ((section(".isr_vector"))) isr_vector[77] =
 	(uint32_t)&DMA2_Channel4_5_Handler,
 	(uint32_t)&Channel5_Handler
 };
+
 
 void Default_Handler(void)
 {

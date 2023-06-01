@@ -5,13 +5,19 @@ SECTIONS
 {
 	.isr_vector :
 	{
-		isr_vector.o(.isr_vector)
+		*(.isr_vector)
 	} > REGION_TEXT
 	.init_array :
+	{
+		/*/home/ros/.local/arm-gnu-toolchain-12.2/bin/../lib/gcc/arm-none-eabi/12.2.1/crtbegin.o(.init_array)*/
+		/home/ros/.local/arm-gnu-toolchain-12.2/bin/../lib/gcc/arm-none-eabi/12.2.1/thumb/v7-m/nofp/crtbegin.o(.init_array)
+	} > REGION_TEXT
+	.init_array_cpp :
 	{
 		init_array_start = .;
 		*(.init_array)
 		init_array_end = .;
+
 	} > REGION_TEXT
 	. = ALIGN(4);
 	.text : 
@@ -19,6 +25,10 @@ SECTIONS
 		*(.text)
 		*(.text.*)
 		. = ALIGN(4);
+	} > REGION_TEXT
+	.eh_frame : 
+	{
+		*(.eh_frame)
 	} > REGION_TEXT
 	.ARM.exidx : {
 /*	    	__exidx_start = .; */
@@ -60,12 +70,14 @@ SECTIONS
 	.bss : AT(data_end)
 	{
 		bss_start = .;
+		__bss_start__ = bss_start;
 		*(.bss)
-		. = ALIGN(4);
+		*(.bss.*)
+		__bss_end__ = .;
 	} > REGION_BSS
 	bss_size = SIZEOF(.bss);
-
 	. = ALIGN(4);
+	end = .;
 	/*. = . + 0x1000;
 	stack_top = .;*/
 
