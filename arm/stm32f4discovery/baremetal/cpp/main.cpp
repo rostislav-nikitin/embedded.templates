@@ -87,7 +87,7 @@ int main(void)
 
 	//x = 200 % 3 + 49;
 
-	printf("[print]Hello world!\n");
+	//print("[print]Hello world!\n");
 	printf("[printf]Hello world!\n");
 	printf("[print]Post Hello world!\n");
 
@@ -99,11 +99,11 @@ int main(void)
 	
 	//staticTestClass.TestMethod();
 
-	printf("Before sprintf");
+	printf("Before sprintf\n");
 	sprintf(buffer, "INT=%d\n", 3U);
 	//sprintf(buffer, "s=", "Test");
 	printf(buffer);
-	printf("Aftersprintf");
+	printf("Aftersprintf\n");
 
 
 

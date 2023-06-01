@@ -88,7 +88,13 @@ openocd:
 	openocd -f board/stm32f4discovery.cfg
 
 flash:
-	arm-none-eabi-gdb --eval-command="target remote localhost:3333" --eval-command="monitor flash write_image erase firmware.elf"
+	echo "expect package required. sudo dnf install exptect; sudo apt-get install expect"
+	./flash.via.telnet.sh
+	#arm-none-eabi-gdb --eval-command="target remote localhost:3333" --eval-command="monitor flash write_image erase firmware.elf"
 
+flash_semih:
+	echo "expect package required. sudo dnf install exptect; sudo apt-get install expect"
+	./flash.via.telnet.semih.sh
+	#arm-none-eabi-gdb --eval-command="target remote localhost:3333" --eval-command="monitor flash write_image erase firmware.elf"
 debug:
 	arm-none-eabi-gdb --eval-command="target remote localhost:3333"
