@@ -1,0 +1,93 @@
+void ResetExceptionHandler();
+void NmiExceptionHandler();
+void HardFaultExceptionHandler();
+void SvcExceptionHandler();
+void PendSvExceptionHandler();
+void SysTickExceptionHandler();
+
+void WwdgInterruptHandler();
+void PvdInterruptHandler();
+void RtcTampInterruptHandler();
+void FlashInterruptHandler();
+void RccCrsInterruptHandler();
+void Exti0To1InterruptHandler();
+void Exti2To3InterruptHandler();
+void Exti4To15InterruptHandler();
+void Ucpd1Ucpd2UsbInterruptHandler();
+void Dma1Channel1InterruptHandler();
+void Dma1Channel2And3InterruptHandler();
+void Dma1Channel4And5And6And7DmaMuxDma2Channel1Ane2And3And4And5InterruptHandler();
+void AdcCompInterruptHandler();
+void Tim1BrkUpTrgComInterruptHandler();
+void Tim1CcInterruptHandler();
+void Tim2InterruptHandler();
+void Tim3Tim4InterruptHandler();
+void Tim6DacLpTim1InterruptHandler();
+void Tim7LpTim2InterruptHandler();
+void Tim14InterruptHandler();
+void Tim15InterruptHandler();
+void Tim16FdCanIt0InterruptHandler();
+void Tim17FdCanIt1InterruptHandler(); 
+void I2C1InterruptHandler();
+void I2C2I2C3InterruptHandler();
+void SPI1InterruptHandler();
+void Spi2Spi3InterruptHandler();
+void Usart1InterruptHandler();
+void Usart2LpUart2InterruptHandler();
+void Usart3Usart4Usart5Usart6LpUart1InterruptHandler();
+void CecInterruptHandler();
+void AesRngInterruptHandler();
+
+
+
+
+
+
+
+
+
+
+
+
+Reserved
+(uint32_t) &ResetExceptionHandler,
+(uint32_t) &NmiExceptionHandler,
+(uint32_t) &HardFaultExceptionHandler,
+(uint32_t) &Reserved,
+(uint32_t) &SvcExceptionHandler,
+(uint32_t) &Reserved,
+(uint32_t) &PendSvExceptionHandler,
+(uint32_t) &SysTickExceptionHandler,
+
+(uint32_t) &WwdgInterruptHandler,
+(uint32_t) &PvdInterruptHandler,
+(uint32_t) &RtcTampInterruptHandler,
+(uint32_t) &FlashInterruptHandler,
+(uint32_t) &RccCrsInterruptHandler,
+(uint32_t) &Exti0To1InterruptHandler,
+(uint32_t) &Exti2To3InterruptHandler,
+(uint32_t) &Exti4To15InterruptHandler,
+(uint32_t) &Ucpd1Ucpd2UsbInterruptHandler,
+(uint32_t) &Dma1Channel1InterruptHandler,
+(uint32_t) &Dma1Channel2And3InterruptHandler,
+(uint32_t) &Dma1Channel4And5And6And7DmaMuxDma2Channel1Ane2And3And4And5InterruptHandler,
+(uint32_t) &AdcCompInterruptHandler,
+(uint32_t) &Tim1BrkUpTrgComInterruptHandler,
+(uint32_t) &Tim1CcInterruptHandler,
+(uint32_t) &Tim2InterruptHandler,
+(uint32_t) &Tim3Tim4InterruptHandler,
+(uint32_t) &Tim6DacLpTim1InterruptHandler,
+(uint32_t) &Tim7LpTim2InterruptHandler,
+(uint32_t) &Tim14InterruptHandler,
+(uint32_t) &Tim15InterruptHandler,
+(uint32_t) &Tim16FdCanIt0InterruptHandler,
+(uint32_t) &Tim17FdCanIt1InterruptHandler, 
+(uint32_t) &I2C1InterruptHandler,
+(uint32_t) &I2C2I2C3InterruptHandler,
+(uint32_t) &SPI1InterruptHandler,
+(uint32_t) &Spi2Spi3InterruptHandler,
+(uint32_t) &Usart1InterruptHandler,
+(uint32_t) &Usart2LpUart2InterruptHandler,
+(uint32_t) &Usart3Usart4Usart5Usart6LpUart1InterruptHandler,
+(uint32_t) &CecInterruptHandler,
+(uint32_t) &AesRngInterruptHandler
