@@ -10,11 +10,9 @@ LDFLAGS_NANO_LIBC_SH := -z muldefs -mcpu=$(MACH) -mthumb  -mfloat-abi=soft --spe
 # -ffreestanding
 #-nostartfiles
 
-#all:firmware.elf
-all:firmware_libc_nano.elf
-#all:firmware_libc_nano_sh.elf
+all:firmware.elf firmware_libc_nano.elf firmware_libc_nano_sh.elf
 
-firmware.elf:stm32g0_isr_vector.o stm32g0_startup.o main.o
+firmware.elf:stm32g0_isr_vector.o stm32g0_startup.o main.o syscalls_pure.o
 	$(CC) $(LDFLAGS) -o $@ $^
 
 firmware_libc_nano.elf:stm32g0_isr_vector.o stm32g0_startup.o main.o syscalls.o
@@ -35,6 +33,9 @@ isr_vector.o:stm32g0_isr_vector.c
 syscalls.o:syscalls.c
 	$(CC) $(CFLAGS) -o $@ $^
 
+syscalls_pure.o:syscalls_pure.c
+	$(CC) $(CFLAGS) -o $@ $^
+
 clean:
 	rm *.o *.elf *.map
 	
@@ -52,6 +53,9 @@ debug:
 
 burn:
 	openocd -f board/st_nucleo_g0.cfg -c "init;targets;halt;flash write_image erase firmware.elf;shutdown"
+
+burn_nano:
+	openocd -f board/st_nucleo_g0.cfg -c "init;targets;halt;flash write_image erase firmware_libc_nano.elf;shutdown"
 
 burn_sh:
 	openocd -f board/st_nucleo_g0.cfg -c "init;targets;halt;flash write_image erase firmware_libc_nano_sh.elf;shutdown"
