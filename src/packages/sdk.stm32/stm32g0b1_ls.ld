@@ -1,6 +1,6 @@
 ENTRY(ResetExceptionHandler)
 
-INCLUDE stm32g0b1.memory
+INCLUDE mcu.memory
 
 /*
 MEMORY
@@ -27,7 +27,12 @@ SECTIONS
 		*(.rodata)
 		*(.rodata.*)
 		. = ALIGN(4);
-		end_of_text = .;
+	    __exidx_start = . ;
+	     *(.ARM.exidx* .gnu.linkonce.armexidx.*)
+		. = ALIGN(4);
+	    __exidx_end = . ;
+		. = ALIGN(4);
+		end_of_text = . ;
 	}> TEXT
 
 	data_load_address = LOADADDR(.data);

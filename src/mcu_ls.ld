@@ -1,0 +1,1 @@
+packages/sdk.stm32/stm32g0b1_ls.ld

@@ -1,0 +1,1 @@
+packages/sdk.stm32/stm32g0_isr_vector.c

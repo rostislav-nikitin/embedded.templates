@@ -3,5 +3,5 @@ if [ ! -d  build ]; then
 fi
 
 cd build
-cmake .. -DCMAKE_TOOLCHAIN_FILE=../toolchain_arm-none-eabi.cmake
+cmake .. -DCMAKE_TOOLCHAIN_FILE=../mcu-toolchain.cmake
 cmake --build .

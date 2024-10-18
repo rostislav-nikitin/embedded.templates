@@ -1,0 +1,1 @@
+packages/sdk.stm32/debug_server.sh

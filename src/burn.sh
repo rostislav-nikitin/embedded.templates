@@ -1,0 +1,1 @@
+packages/sdk.stm32/burn.sh
