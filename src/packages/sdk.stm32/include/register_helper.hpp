@@ -5,26 +5,64 @@
 
 namespace Memory
 {
+	template<typename RegType>
+	class RegHelper
+	{
+		constexpr static inline void 
+		template <RegType *reg, int bit>
+		constexpr static inline void setBit() const
+		{
+			*reg |= (1UL << bit);
+		}
+	};
 
-	template<reg_t reg>
+	RegHelper<u32>::setBit<0>();
+
+	template<typename Reg>
 	class RegisterHelper
 	{
-		// Bit
-		void bitSetValue(Bit bit, bool value);
-		bool bitGetValue(Bit bit);
+	public:
+		RegisterHelper(Reg* reg) : reg_(reg)
+		{
+		}
 
-		void bitSet(Bit bit);
-		void bitReset(Bit bit);
-		void bitToggle(Bit bit);
+		// Bit
+		void bitSetValue(Bit bit, bool value)
+		{
+			//assert(bit <= sizeof(value) * 8
+			*reg_ |= ((value ? 1UL : 0UL) << bit);
+		}
+		bool bitGetValue(Bit bit)
+		{
+			return *reg & (1UL << bit);
+		}
+
+		void bitSet(Bit bit)
+		{
+			bitSetValue(bit, true);
+		}
+		void bitReset(Bit bit)
+		{
+			bitSerValue(bit, false);
+		}
+		bool bitToggle(Bit bit)
+		{
+			bool value = !bitGetValue(bit);
+
+			bitSetValue(bit, value);
+
+			return value;
+		}
 
 		// Bit Group
-		void bitGroupSetValue(Bit startBit, u8 length, u32 value);
-		u32 bitGroupGetValue(Bit startBit, u8 length);
+		void bitGroupSetValue(Bit startBit, u8 length, Reg value);
+		Reg bitGroupGetValue(Bit startBit, u8 length);
 
 		void bitGroupSet(Bit startBit, u8 length);
 		void bitGroupReset(Bit startBit, u8 length);
 		void bitGroupToggle(Bit startBit, u8 length);
-
+	private:
+		Reg* reg_;
 	};
 }
 
