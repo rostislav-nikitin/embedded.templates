@@ -1,5 +1,4 @@
 #include <cstdint>
-#include <iostream>
 
 #define BIT_GET(value, bit) (value & (1UL << (bit)))
 #define BIT_RESET(value, bit) (value &= ~(1UL << (bit)))

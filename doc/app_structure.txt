@@ -1,0 +1,14 @@
+startup
+	uart1
+		.enable()
+		.setSpeed(CB_9600);
+
+	ITransceiver *debugTransceiver = new UartTransceiver(uart1);
+
+	AppBuilder appBuilder;
+	App app = appBuilder
+		.setDebugTransceiver(debugTransceiver);
+		.build();
+
+	app.run();
+	
