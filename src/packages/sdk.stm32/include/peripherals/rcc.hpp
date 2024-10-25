@@ -1,26 +1,25 @@
 #ifndef __PERIPHERALS_RCC_HPP__
 #define __PERIPHERALS_RCC_HPP__
 
-#include "../types.hpp"
-#include "../register_helper.hpp"
+#include <cstring>
+#include <algorithm>
 
-namespace Peripheral
+#include "../device_clock_config_t.hpp"
+#include "../bit_operations.hpp"
+
+namespace Peripherals
 {
 	class Rcc
 	{
 	public:
-		void ioPortGpioAEnable();
-		void ioPortGpioADisable();
-		void ioPortGpioBEnable();
-		void ioPortGpioBDisable();
-		void ioPortGpioCEnable();
-		void ioPortGpioCDisable();
-		void ioPortGpioDEnable();
-		void ioPortGpioDDisable();
-		void ioPortGpioEEnable();
-		void ioPortGpioEDisable();
-		void ioPortGpioFEnable();
-		void ioPortGpioFDisable();
+		void setClockEnabled(char const *id, bool value);
+		bool getClockEnabled(char const *id);
+		void setReset(char const *id, bool value);
+		bool getReset(char const *id);
+		void setSleepModeClockEnabled(char const *id, bool value);
+		bool getSleepModeClockEnabled(char const *id);
+	private:
+		device_clock_config_t &getDeviceClockConfig(char const *id);
 	};
 }
 

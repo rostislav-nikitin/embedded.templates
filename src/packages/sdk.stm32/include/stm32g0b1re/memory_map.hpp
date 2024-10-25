@@ -1,28 +1,40 @@
 #ifndef __MEMORY_MAP_HPP__
 #define __MEMORY_MAP_HPP__
 
-#include "../types.hpp"
+#define AhbBaseAddress 0x40020000UL
 
-namespace MemoryMap
-{
-	u32 const constexpr AhbBaseAddress = 0x40020000UL;
+#define RccOffset 0x00001000UL
+#define RccBaseAddress (AhbBaseAddress + RccOffset)
 
-	u32 const constexpr RccOffset = 0x00001000UL;
-	u32 const constexpr RccBaseAddress = AhbBase + RccOffset;
-
-	u32 const constexpr RccClockControlRegisterOffset = 0x00;
-	u32 const constexpr RccClockControlRegisterAddress = RccBaseAddress + RccClockControlRegisterOffset;
+#define RccClockControlRegisterOffset 0x00UL
+#define RccClockControlRegisterAddress (RccBaseAddress + RccClockControlRegisterOffset)
 
 	//...
+#define RccIoPortResetRegisterOffset 0x24UL
+#define RccIoPortResetRegisterAddress (RccBaseAddress + RccIoPortResetRegisterOffset)
+#define RccIoPortResetGpioABit 0U
+#define RccIoPortResetGpioBBit 1U
+#define RccIoPortResetGpioCBit 2U
+#define RccIoPortResetGpioDBit 3U
+#define RccIoPortResetGpioEBit 4U
+#define RccIoPortResetGpioFBit 5U
 	
-	u32 const constexpr RccIoPortEnableRegisterOffset = 0x34;
-	u32 const constexpr RccIoPortEnableRegisterAddress = RccBaseAddress + RccIoPortEnableRegisterOffset;
-	Bit const constexpr RccIoPortEnableGpioABit = Bit::Bit0;
-	Bit const constexpr RccIoPortEnableGpioBBit = Bit::Bit1;
-	Bit const constexpr RccIoPortEnableGpioCBit = Bit::Bit2;
-	Bit const constexpr RccIoPortEnableGpioDBit = Bit::Bit3;
-	Bit const constexpr RccIoPortEnableGpioEBit = Bit::Bit4;
-	Bit const constexpr RccIoPortEnableGpioFBit = Bit::Bit5;
-}
+#define RccIoPortClockEnableRegisterOffset 0x34UL
+#define RccIoPortClockEnableRegisterAddress (RccBaseAddress + RccIoPortClockEnableRegisterOffset)
+#define RccIoPortClockEnableGpioABit 0U
+#define RccIoPortClockEnableGpioBBit 1U
+#define RccIoPortClockEnableGpioCBit 2U
+#define RccIoPortClockEnableGpioDBit 3U
+#define RccIoPortClockEnableGpioEBit 4U
+#define RccIoPortClockEnableGpioFBit 5U
+
+#define RccIoPortSleepModeClockEnableRegisterOffset 0x34UL
+#define RccIoPortSleepModeClockEnableRegisterAddress (RccBaseAddress + RccIoPortSleepModeClockEnableRegisterOffset)
+#define RccIoPortSleepModeClockEnableGpioABit 0U
+#define RccIoPortSleepModeClockEnableGpioBBit 1U
+#define RccIoPortSleepModeClockEnableGpioCBit 2U
+#define RccIoPortSleepModeClockEnableGpioDBit 3U
+#define RccIoPortSleepModeClockEnableGpioEBit 4U
+#define RccIoPortSleepModeClockEnableGpioFBit 4U
 
 #endif

@@ -34,3 +34,9 @@ target_link_options(firmware_libc_nano_sh.elf PUBLIC -mcpu=${MACH} -mthumb -mflo
 
 file(COPY "${CMAKE_CURRENT_SOURCE_DIR}/stm32g0b1_ls.ld" DESTINATION "${CMAKE_CURRENT_BINARY_DIR}")
 file(COPY "${CMAKE_CURRENT_SOURCE_DIR}/mcu.memory" DESTINATION "${CMAKE_CURRENT_BINARY_DIR}")
+
+# TESTS
+#add_executable(test_runner_peripheral_rcc
+#		src/peripherals/rcc.cpp
+#		src/stm32g0b1re/device_clock_configs.cpp
+#		tests/test_runner_peripheral_rcc.cpp)
