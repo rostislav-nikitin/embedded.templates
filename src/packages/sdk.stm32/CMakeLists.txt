@@ -10,18 +10,26 @@ set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -mcpu=${MACH} -mthumb -mfloat-abi=soft -
 
 
 # NOLIB
-add_executable(firmware.elf
-		stm32g0_isr_vector.c
-		stm32g0_startup.cpp
-		syscalls_pure.c
-		main.cpp)
-target_link_options(firmware.elf PUBLIC -nostdlib -T stm32g0b1_ls.ld -Wl,-Map=firmware.map)
+#add_executable(firmware.elf
+#		stm32g0_isr_vector.c
+#		stm32g0_startup.cpp
+#		syscalls_pure.c
+#		src/device_clock_config_t.cpp
+#		src/memory.cpp
+#		src/stm32g0b1re/device_clock_configs.cpp
+#		src/peripherals/rcc.cpp
+#		main.cpp)
+#target_link_options(firmware.elf PUBLIC -nostdlib -T stm32g0b1_ls.ld -Wl,-Map=firmware.map)
 
 # LIBC NANO
 add_executable(firmware_libc_nano.elf
 		stm32g0_isr_vector.c
 		stm32g0_startup.cpp
 		syscalls.c
+		src/device_clock_config_t.cpp
+		src/memory.cpp
+		src/stm32g0b1re/device_clock_configs.cpp
+		src/peripherals/rcc.cpp
 		main.cpp)
 target_link_options(firmware_libc_nano.elf PUBLIC -mcpu=${MACH} -mthumb -mfloat-abi=soft --specs=nano.specs  -T stm32g0b1_ls.ld -Wl,-Map=firmware_libc_nano.map)
 
@@ -29,6 +37,10 @@ target_link_options(firmware_libc_nano.elf PUBLIC -mcpu=${MACH} -mthumb -mfloat-
 add_executable(firmware_libc_nano_sh.elf
 		stm32g0_isr_vector.c
 		stm32g0_startup.cpp
+		src/device_clock_config_t.cpp
+		src/memory.cpp
+		src/stm32g0b1re/device_clock_configs.cpp
+		src/peripherals/rcc.cpp
 		main.cpp)
 target_link_options(firmware_libc_nano_sh.elf PUBLIC -mcpu=${MACH} -mthumb -mfloat-abi=soft --specs=rdimon.specs  -T stm32g0b1_ls.ld -Wl,-Map=firmware_libc_nano_sh.map)
 

@@ -2,7 +2,7 @@
 #include "../peripherals/rcc.hpp"
 
 
-namespace Peripheral
+namespace Peripherals
 {
 	RCC &rcc = *reinterpret_cast<RCC *>(RccBaseAddress);
 }

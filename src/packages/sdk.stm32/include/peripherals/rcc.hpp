@@ -6,6 +6,7 @@
 
 #include "../device_clock_config_t.hpp"
 #include "../bit_operations.hpp"
+#include "../memory.hpp"
 
 namespace Peripherals
 {

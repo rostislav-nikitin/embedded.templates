@@ -2,7 +2,9 @@
 #include <stdlib.h>
 #include <cstdint>
 
-class Rcc
+#include "include/stm32g0b1re/peripherals.hpp"
+
+/*class Rcc
 {
 private:
 	static uint32_t constexpr const RccBaseAddress = 0x40021000UL;
@@ -18,7 +20,7 @@ public:
 		//printf("RCCPtr=%p, RCCValue=%ld\n", rccIopEnR, *rccIopEnR);
 	}
 	
-};
+};*/
 
 //PA5
 #define IOPORT_BASE 0x50000000
@@ -81,8 +83,10 @@ public:
 int main()
 {
     //printf("Started.\n");
-	Rcc rcc;
-	rcc.enableGpioA();
+//	Rcc rcc;
+//	rcc.enableGpioA();
+
+	Peripherals::rcc.setClockEnabled("GPIOA", true);
 
 	Gpio &gpioA = *reinterpret_cast<Gpio *>(IOPORT_BASE + GPIOA_OFFSET);
 	//printf("GPIO ADDR=%p\n", &gpioA);

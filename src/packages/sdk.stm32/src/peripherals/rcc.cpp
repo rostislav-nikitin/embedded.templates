@@ -1,5 +1,4 @@
 #include "../../include/peripherals/rcc.hpp"
-#include <iostream>
 
 extern device_clock_config_t device_clock_configs[];
 
@@ -9,13 +8,13 @@ namespace Peripherals
 	{
 	    auto &deviceClockConfig = getDeviceClockConfig(id);
 	    if(deviceClockConfig != device_clock_config_t{NULL})
-			BIT_SET(deviceClockConfig.resetRegisterAddress, deviceClockConfig.resetBit);
+			BIT_SET_ADDR(deviceClockConfig.resetRegisterAddress, deviceClockConfig.resetBit);
 	}
 	bool Rcc::getReset(char const *id)
 	{
 	    auto &deviceClockConfig = getDeviceClockConfig(id);
 	    if(deviceClockConfig != device_clock_config_t{NULL})
-			return BIT_GET(deviceClockConfig.resetRegisterAddress, deviceClockConfig.resetBit);
+			return BIT_GET_ADDR(deviceClockConfig.resetRegisterAddress, deviceClockConfig.resetBit);
 
 	    return false;
 	}
@@ -24,13 +23,13 @@ namespace Peripherals
 	{
 	    auto &deviceClockConfig = getDeviceClockConfig(id);
 	    if(deviceClockConfig != device_clock_config_t{NULL})
-			BIT_SET(deviceClockConfig.clockEnableRegisterAddress, deviceClockConfig.clockEnableBit);
+			BIT_SET_ADDR(deviceClockConfig.clockEnableRegisterAddress, deviceClockConfig.clockEnableBit);
 	}
 	bool Rcc::getClockEnabled(char const *id)
 	{
 	    auto &deviceClockConfig = getDeviceClockConfig(id);
 	    if(deviceClockConfig != device_clock_config_t{NULL})
-			return BIT_GET(deviceClockConfig.clockEnableRegisterAddress, deviceClockConfig.clockEnableBit);
+			return BIT_GET_ADDR(deviceClockConfig.clockEnableRegisterAddress, deviceClockConfig.clockEnableBit);
 
 	    return false;
 	}
@@ -39,13 +38,13 @@ namespace Peripherals
 	{
 	    auto &deviceClockConfig = getDeviceClockConfig(id);
 	    if(deviceClockConfig != device_clock_config_t{NULL})
-			BIT_SET(deviceClockConfig.sleepModeClockEnableRegisterAddress, deviceClockConfig.sleepModeClockEnableBit);
+			BIT_SET_ADDR(deviceClockConfig.sleepModeClockEnableRegisterAddress, deviceClockConfig.sleepModeClockEnableBit);
 	}
 	bool Rcc::getSleepModeClockEnabled(char const *id)
 	{
 	    auto &deviceClockConfig = getDeviceClockConfig(id);
 	    if(deviceClockConfig != device_clock_config_t{NULL})
-			return BIT_GET(deviceClockConfig.sleepModeClockEnableRegisterAddress, deviceClockConfig.sleepModeClockEnableBit);
+			return BIT_GET_ADDR(deviceClockConfig.sleepModeClockEnableRegisterAddress, deviceClockConfig.sleepModeClockEnableBit);
 
 	    return false;
 	}
