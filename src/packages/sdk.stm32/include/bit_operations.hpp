@@ -21,5 +21,5 @@
 #define BIT_GROUP_RESET_ADDR(addr, bit, size)(BIT_GROUP_RESET_PTR(reinterpret_cast<uint32_t *>(addr), (bit), (size)))
 
 #define BIT_GROUP_SET(value, bit, size, bit_group_value) (BIT_GROUP_RESET(value, (bit), (size))) |= (bit_group_value)
-#define BIG_GROUP_SET_PTR(ptr, bit, size, bit_group_value) (BIT_GROUP_SET(*(ptr), (bit), (size), (bit_group_value)))
+#define BIT_GROUP_SET_PTR(ptr, bit, size, bit_group_value) (BIT_GROUP_SET(*(ptr), (bit), (size), (bit_group_value)))
 #define BIT_GROUP_SET_ADDR(addr, bit, size, bit_group_value) (BIT_GROUP_SET_PTR(reinterpret_cast<uint32_t *>(addr), (bit), (size), (bit_group_value)))

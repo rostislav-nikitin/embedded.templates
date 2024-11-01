@@ -86,6 +86,7 @@ int main()
 //	Rcc rcc;
 //	rcc.enableGpioA();
 
+
 	Peripherals::rcc.setClockEnabled("GPIOA", true);
 
 	Gpio &gpioA = *reinterpret_cast<Gpio *>(IOPORT_BASE + GPIOA_OFFSET);
@@ -99,11 +100,13 @@ int main()
 
     while(1)
     {
-		gpioA.resetOdr();
-		for(uint32_t i = 0; i < 1330000; ++i);
-		gpioA.setOdr();
-		for(uint32_t i = 0; i < 1330000; ++i);
+	printf("NEXT\n");
+	gpioA.resetOdr();
+	for(uint32_t i = 0; i < 1330000; ++i);
+	gpioA.setOdr();
+	for(uint32_t i = 0; i < 1330000; ++i);
+	
 
-		//printf("ODR=%ld\n", gpioA.getOdr());
+	printf("ODR=%ld\n", gpioA.getOdr());
     }
 }

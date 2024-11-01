@@ -1,5 +1,5 @@
 #include "../../include/peripherals/rcc.hpp"
-
+#include <cstdio>
 extern device_clock_config_t device_clock_configs[];
 
 namespace Peripherals
@@ -21,15 +21,23 @@ namespace Peripherals
 
 	void Rcc::setClockEnabled(char const *id, bool value)
 	{
+	    printf("%s\n", __PRETTY_FUNCTION__);
 	    auto &deviceClockConfig = getDeviceClockConfig(id);
 	    if(deviceClockConfig != device_clock_config_t{NULL})
+	    {
+			printf("Set bit for address: %ld, bit: %ld\n", deviceClockConfig.clockEnableRegisterAddress, deviceClockConfig.clockEnableBit);
 			BIT_SET_ADDR(deviceClockConfig.clockEnableRegisterAddress, deviceClockConfig.clockEnableBit);
+	    }
+	    else
+	    {
+			printf("deviceClockConfig is NULL\n");
+	    }	
 	}
 	bool Rcc::getClockEnabled(char const *id)
 	{
 	    auto &deviceClockConfig = getDeviceClockConfig(id);
 	    if(deviceClockConfig != device_clock_config_t{NULL})
-			return BIT_GET_ADDR(deviceClockConfig.clockEnableRegisterAddress, deviceClockConfig.clockEnableBit);
+		return BIT_GET_ADDR(deviceClockConfig.clockEnableRegisterAddress, deviceClockConfig.clockEnableBit);
 
 	    return false;
 	}
@@ -38,13 +46,13 @@ namespace Peripherals
 	{
 	    auto &deviceClockConfig = getDeviceClockConfig(id);
 	    if(deviceClockConfig != device_clock_config_t{NULL})
-			BIT_SET_ADDR(deviceClockConfig.sleepModeClockEnableRegisterAddress, deviceClockConfig.sleepModeClockEnableBit);
+		BIT_SET_ADDR(deviceClockConfig.sleepModeClockEnableRegisterAddress, deviceClockConfig.sleepModeClockEnableBit);
 	}
 	bool Rcc::getSleepModeClockEnabled(char const *id)
 	{
 	    auto &deviceClockConfig = getDeviceClockConfig(id);
 	    if(deviceClockConfig != device_clock_config_t{NULL})
-			return BIT_GET_ADDR(deviceClockConfig.sleepModeClockEnableRegisterAddress, deviceClockConfig.sleepModeClockEnableBit);
+		return BIT_GET_ADDR(deviceClockConfig.sleepModeClockEnableRegisterAddress, deviceClockConfig.sleepModeClockEnableBit);
 
 	    return false;
 	}
@@ -52,12 +60,22 @@ namespace Peripherals
 	::device_clock_config_t &Rcc::getDeviceClockConfig(char const *id)
 	{
 	    device_clock_config_t end{NULL};
-	    auto result = std::find_if(device_clock_configs, &end,
-		[id](device_clock_config_t const &deviceClockConfig)
-		{
-		    //std::cout << deviceClockConfig.id << std::endl;
-		    return strcmp(deviceClockConfig.id, id) == 0;
-		});
+/*	    auto result = std::find_if(device_clock_configs, &end,
+			[id](device_clock_config_t const &deviceClockConfig)
+			{
+			    //std::cout << deviceClockConfig.id << std::endl;
+			    printf("STEP id: %s\n", deviceClockConfig.id);
+			    return strcmp(deviceClockConfig.id, id) == 0;
+			});
 	    return *result;
+*/
+	    device_clock_config_t *start = &device_clock_configs[0];
+		for(;*start != end; ++start)
+		{
+			if(strcmp(start->id, id) == 0)
+				break;
+		}
+
+		return *start;		
 	}
 }
