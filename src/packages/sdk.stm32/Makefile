@@ -2,7 +2,7 @@ CC := arm-none-eabi-gcc
 LD := arm-none-eabi-gcc
 CXX := arm-none-eabi-g++
 MACH := cortex-m0
-CFLAGS := -c -mcpu=$(MACH) -mthumb -mfloat-abi=soft -std=gnu11 -Wall -O0 
+CFLAGS := -c -mcpu=$(MACH) -mthumb -mfloat-abi=soft -std=gnu11 -Wall -O0
 CXXFLAGS := -c -mcpu=$(MACH) -mthumb -mfloat-abi=soft -std=c++17 -Wall -O0 -fno-stack-protector -fno-exceptions
 LDFLAGS := -nostdlib -T stm32g0b1_ls.ld -Wl,-Map=firmware.map
 LDFLAGS_NANO_LIBC := -z muldefs -mcpu=$(MACH) -mthumb  -mfloat-abi=soft --specs=nano.specs -T stm32g0b1_ls.ld -Wl,-Map=firmware.map

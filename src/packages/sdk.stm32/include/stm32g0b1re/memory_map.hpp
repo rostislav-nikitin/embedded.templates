@@ -2,14 +2,16 @@
 #define __MEMORY_MAP_HPP__
 
 #define AhbBaseAddress 0x40020000
+#define IoPortsBaseAddress 0x50000000
 
+// RCC
 #define RccOffset 0x00001000
 #define RccBaseAddress (AhbBaseAddress + RccOffset)
 
 #define RccClockControlRegisterOffset 0x00
 #define RccClockControlRegisterAddress (RccBaseAddress + RccClockControlRegisterOffset)
 
-	//...
+//...
 #define RccIoPortResetRegisterOffset 0x24
 #define RccIoPortResetRegisterAddress (RccBaseAddress + RccIoPortResetRegisterOffset)
 #define RccIoPortResetGpioABit 0U
@@ -36,5 +38,20 @@
 #define RccIoPortSleepModeClockEnableGpioDBit 3U
 #define RccIoPortSleepModeClockEnableGpioEBit 4U
 #define RccIoPortSleepModeClockEnableGpioFBit 4U
+
+// GPIO
+#define GpioAOffset 0x0000
+#define GpioBOffset 0x0400
+#define GpioCOffset 0x0800
+#define GpioDOffset 0x0C00
+#define GpioEOffset 0x1000
+#define GpioFOffset 0x1400
+
+#define GpioABaseAddress (IoPortsBaseAddress + GpioAOffset)
+#define GpioBBaseAddress (IoPortsBaseAddress + GpioBOffset)
+#define GpioCBaseAddress (IoPortsBaseAddress + GpioCOffset)
+#define GpioDBaseAddress (IoPortsBaseAddress + GpioDOffset)
+#define GpioEBaseAddress (IoPortsBaseAddress + GpioEOffset)
+#define GpioFBaseAddress (IoPortsBaseAddress + GpioFOffset)
 
 #endif

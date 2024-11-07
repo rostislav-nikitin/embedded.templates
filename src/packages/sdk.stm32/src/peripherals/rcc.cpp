@@ -1,5 +1,4 @@
 #include "../../include/peripherals/rcc.hpp"
-#include <cstdio>
 extern device_clock_config_t device_clock_configs[];
 
 namespace Peripherals
@@ -21,23 +20,15 @@ namespace Peripherals
 
 	void Rcc::setClockEnabled(char const *id, bool value)
 	{
-	    printf("%s\n", __PRETTY_FUNCTION__);
 	    auto &deviceClockConfig = getDeviceClockConfig(id);
 	    if(deviceClockConfig != device_clock_config_t{NULL})
-	    {
-			printf("Set bit for address: %ld, bit: %ld\n", deviceClockConfig.clockEnableRegisterAddress, deviceClockConfig.clockEnableBit);
 			BIT_SET_ADDR(deviceClockConfig.clockEnableRegisterAddress, deviceClockConfig.clockEnableBit);
-	    }
-	    else
-	    {
-			printf("deviceClockConfig is NULL\n");
-	    }	
 	}
 	bool Rcc::getClockEnabled(char const *id)
 	{
 	    auto &deviceClockConfig = getDeviceClockConfig(id);
 	    if(deviceClockConfig != device_clock_config_t{NULL})
-		return BIT_GET_ADDR(deviceClockConfig.clockEnableRegisterAddress, deviceClockConfig.clockEnableBit);
+			return BIT_GET_ADDR(deviceClockConfig.clockEnableRegisterAddress, deviceClockConfig.clockEnableBit);
 
 	    return false;
 	}
@@ -46,7 +37,7 @@ namespace Peripherals
 	{
 	    auto &deviceClockConfig = getDeviceClockConfig(id);
 	    if(deviceClockConfig != device_clock_config_t{NULL})
-		BIT_SET_ADDR(deviceClockConfig.sleepModeClockEnableRegisterAddress, deviceClockConfig.sleepModeClockEnableBit);
+			BIT_SET_ADDR(deviceClockConfig.sleepModeClockEnableRegisterAddress, deviceClockConfig.sleepModeClockEnableBit);
 	}
 	bool Rcc::getSleepModeClockEnabled(char const *id)
 	{

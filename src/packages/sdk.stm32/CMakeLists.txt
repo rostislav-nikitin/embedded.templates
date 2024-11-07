@@ -30,6 +30,7 @@ add_executable(firmware_libc_nano.elf
 		src/memory.cpp
 		src/stm32g0b1re/device_clock_configs.cpp
 		src/peripherals/rcc.cpp
+		src/peripherals/gpio.cpp
 		main.cpp)
 target_link_options(firmware_libc_nano.elf PUBLIC -mcpu=${MACH} -mthumb -mfloat-abi=soft --specs=nano.specs  -T stm32g0b1_ls.ld -Wl,-Map=firmware_libc_nano.map)
 
@@ -41,6 +42,7 @@ add_executable(firmware_libc_nano_sh.elf
 		src/memory.cpp
 		src/stm32g0b1re/device_clock_configs.cpp
 		src/peripherals/rcc.cpp
+		src/peripherals/gpio.cpp
 		main.cpp)
 target_link_options(firmware_libc_nano_sh.elf PUBLIC -mcpu=${MACH} -mthumb -mfloat-abi=soft --specs=rdimon.specs  -T stm32g0b1_ls.ld -Wl,-Map=firmware_libc_nano_sh.map)
 
