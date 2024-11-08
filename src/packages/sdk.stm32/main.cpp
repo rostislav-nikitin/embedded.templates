@@ -88,6 +88,12 @@ int main()
 
 
 	Peripherals::rcc.setClockEnabled("GPIOA", true);
+	Peripherals::Gpio::Pin pin0 = Peripherals::gpioA[0];
+	pin0
+		.setMode(Peripherals::Gpio::Pin::Mode::GeneralPurposeOutput)
+		.setOutputType(Peripherals::Gpio::Pin::OutputType::PushPull)
+		.setOutputSpeed(Peripherals::Gpio::Pin::OutputSpeed::VeryLow)
+		.setPullUpPullDown(Peripherals::Gpio::Pin::PullUpPullDown::NoPull);
 
 	Gpio &gpioA = *reinterpret_cast<Gpio *>(IOPORT_BASE + GPIOA_OFFSET);
 	//printf("GPIO ADDR=%p\n", &gpioA);
